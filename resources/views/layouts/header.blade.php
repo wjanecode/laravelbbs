@@ -1,35 +1,45 @@
-<nav class=" navbar navbar-light bg-light">
-<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
-        data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-        aria-expanded="false" aria-label="Toggle navigation"></button>
-<div class="collapse navbar-expand-md" id="collapsibleNavId">
-    <a class="navbar-brand" href="#">My App/Logo with Text</a>
-    <ul class="nav navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Nav 1 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Nav 2</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="dropdownId"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nav 3 dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="#">Action 1</a>
-                <a class="dropdown-item" href="#">Action 2</a>
-            </div>
-        </li>
-    </ul>
-    <form class="form-inline float-xs-right">
-        <input class="form-control" type="text" placeholder="搜索">
-        <button class="btn btn-outline-success" type="submit">搜索</button>
-    </form>
-    <ul class="navbar-nav navbar-right">
-        <!-- Authentication Links -->
-        <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">注册</a></li>
-    </ul>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Fixed navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">首页<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">分类</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="搜索">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        </form>
 
-</div>
+        <ul class="navbar-nav navbar-right">
+            <!-- Authentication Links -->
+            @if( !Auth::check())
+            <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">注册</a></li>
+            @else
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="nav-link" href="#">个人中心</a>
+                    <a class="dropdown-item" href="#">注销</a>
+                </div>
+            </div>
+            @endif
+        </ul>
+
+    </div>
 </nav>
+
+
 

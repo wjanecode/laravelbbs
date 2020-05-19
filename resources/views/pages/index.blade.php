@@ -2,8 +2,9 @@
 
 @section('title')
 首页
-@endsection
-
+@stop
 @section('content')
-
-@endsection
+    <p>
+        这是首页三生三世
+    </p>
+@stop
