@@ -5,6 +5,6 @@
 @stop
 @section('content')
     <p>
-        这是首页三生三世
+    dfvsd
     </p>
 @stop
