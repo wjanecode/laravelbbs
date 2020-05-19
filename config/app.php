@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'UGC论坛'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,10 @@ return [
         /*
          * Package Service Providers...
          */
+        //IDE helper
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //debugger
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
