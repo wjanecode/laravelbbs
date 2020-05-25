@@ -64,18 +64,19 @@
                             <label for="" class="col-md-4 col-form-label text-md-right">验证码</label>
 
                             <div class="col-md-6">
-                                <input id="captcha" type="text" class="col-md-4 form-control @error('captcha') is-invalid @enderror" name="captcha" required >
-                                <span>{{ Captcha::img('math') }}</span>
+                                <input id="captcha" type="text" class="col-md-3  @error('captcha') is-invalid @enderror" name="captcha" required >
+                                <span> <img  src="{{ captcha_src() }}" onclick="this.src='/captcha/default?'+Math.random()" alt=""></span>
                             </div>
+
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-
+                                    注册
                                 </button>
-                                {{ __('Register') }}
                             </div>
+
                         </div>
                     </form>
                 </div>
