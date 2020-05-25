@@ -26,19 +26,28 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
             @else
-            <div class="dropdown">
+            <div class="dropdown open">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="nav-link" href="#">个人中心</a>
+                    <a class="dropdown-item" href="#">个人中心</a>
                     <a class="dropdown-item" href="{{ route('logout') }}">注销</a>
                 </div>
             </div>
+
             @endif
         </ul>
+
     </div>
+
+
+
 </nav>
+
+
+
+
 
 
 

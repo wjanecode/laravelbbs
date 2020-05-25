@@ -12,6 +12,7 @@
     <!--style-->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+
     <title>@yield('title','')-switch论坛</title>
 </head>
 <body>
@@ -28,8 +29,11 @@
     <!--底部模块-->
     @include('layouts.footer')
 </div>
-<!--script-->
-<script type="javascript" src="{{ mix('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ mix('js/app.js') }}" ></script>
 
+<script>
+    $('.dropdown-toggle').dropdown();
+</script>
 </body>
 </html>
