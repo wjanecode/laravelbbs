@@ -83,7 +83,7 @@ class UsersController extends Controller
         $user->introduce = $request->get('introduce');
         //判断有没有上传图片
         if ($request->avatar){
-            $result = $uploader->upload($request->avatar,'avatar','avatar');//转存头像
+            $result = $uploader->upload($request->avatar,'avatar','avatar',650);//转存头像
             $user->avatar = $result['path'];
         }
 
