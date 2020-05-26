@@ -6,12 +6,12 @@
         {{--用户信息--}}
         <div class="col-md-3">
            <div class="card">
-             <img class="card-img-top" src="holder.js/100px80"  alt="头像">
+             <img class="card-img-top" src="{{asset($user->avatar)}}"  alt="头像">
              <div class="card-body">
                <h5 class="card-title"><strong>个人简介</strong></h5>
-               <p class="card-text"></p>
+               <p class="card-text">{{ $user->introduce }}</p>
                <h5><strong>加入时间</strong></h5>
-                 <p>{{ $user->created_at }}</p>
+                 <p>{{ $user->created_at->diffForHumans() }}</p>
                <a href="{{ route('users.edit',Auth::id()) }}" class="btn btn-primary">修改信息</a>
              </div>
            </div>

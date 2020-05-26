@@ -2,15 +2,26 @@
 @section('title','修改信息')
 @section('content')
     <div class="row justify-content-center">
-        <form class="form col-md-6" action="{{ route('users.update',$user->id) }}" method="POST">
+        <form class="form col-md-6" action="{{ route('users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+            {{--加载错误模板--}}
+            @include('share.error')
+
             {{ csrf_field() }}
             {{--PUT方法不能直接写在form那里,要先写POST,再在下面补充为PUT            --}}
             <input type="text" hidden name="_method" value="PUT">
+
             <div class="form-group">
                 <label for="">用户名</label>
                 <input
                     type="text"
                     name="name" id="name" class="form-control" value="{{ $user->name }}" required aria-describedby="helpId">
+            </div>
+            <div class="form-group">
+                <label for="">头像</label>
+
+                <input
+                    type="file"
+                    name="avatar" id="avatar" class="form-control" value="{{ $user->avatar }}"  aria-describedby="helpId">
             </div>
             <div class="form-group">
                 <label for="">邮箱</label>

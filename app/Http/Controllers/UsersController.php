@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
@@ -71,7 +73,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request,ImageUploadHandler $uploader, $id)
     {
         //
 
@@ -79,7 +81,15 @@ class UsersController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->introduce = $request->get('introduce');
+        //判断有没有上传图片
+        if ($request->avatar){
+            $result = $uploader->upload($request->avatar,'avatar','avatar');//转存头像
+            $user->avatar = $result['path'];
+        }
+
         $user->save();
+        session()->flash('success','个人信息修改成功');
+        return redirect(route('users.show',\Auth::id()));
     }
 
     /**

@@ -64,9 +64,11 @@
                             <label for="" class="col-md-4 col-form-label text-md-right">验证码</label>
 
                             <div class="col-md-6">
-                                <input id="captcha" type="text" class="col-md-3  @error('captcha') is-invalid @enderror" name="captcha" required >
-                                <span> <img  src="{{ captcha_src() }}" onclick="this.src='/captcha/default?'+Math.random()" alt=""></span>
+                                <input id="captcha" type="text" class=" form-control @error('captcha') is-invalid @enderror" name="captcha" required >
+
+                                <img  src="{{ captcha_src() }}" onclick="this.src='/captcha/default?'+Math.random()" alt="">
                             </div>
+
 
                         </div>
 
