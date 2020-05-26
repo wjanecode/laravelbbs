@@ -31,7 +31,7 @@
                     {{ Auth::user()->name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">个人中心</a>
+                    <a class="dropdown-item" href="{{ url('users'.'/'.Auth::id()) }}">个人中心</a>
                     <a class="dropdown-item" href="{{ route('logout') }}">注销</a>
                 </div>
             </div>

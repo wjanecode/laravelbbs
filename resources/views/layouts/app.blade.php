@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
 
-    <title>@yield('title','')-switch论坛</title>
+    <title>@yield('title','首页')-switch论坛</title>
 </head>
 <body>
 <!--自定义函数获取路由名称来赋对应的class样式-->
