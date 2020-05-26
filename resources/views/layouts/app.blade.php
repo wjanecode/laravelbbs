@@ -11,6 +11,8 @@
 
     <!--style-->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" ></script>
 
 
     <title>@yield('title','首页')-switch论坛</title>
@@ -29,11 +31,18 @@
     <!--底部模块-->
     @include('layouts.footer')
 </div>
-<!-- Scripts -->
-<script src="{{ mix('js/app.js') }}" ></script>
+
 
 <script>
+    //下拉菜单
     $('.dropdown-toggle').dropdown();
+
+    //初始化vue
+    const app = new Vue({
+        el: '#app',
+    });
 </script>
+@yield('js')
+
 </body>
 </html>

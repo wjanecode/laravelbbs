@@ -12,7 +12,7 @@
                <p class="card-text"></p>
                <h5><strong>加入时间</strong></h5>
                  <p>{{ $user->created_at }}</p>
-               <a href="#" class="btn btn-primary">修改信息</a>
+               <a href="{{ route('users.edit',Auth::id()) }}" class="btn btn-primary">修改信息</a>
              </div>
            </div>
         </div>
