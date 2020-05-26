@@ -9,6 +9,9 @@ use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
+    public function __construct(  ) {
+        $this->middleware('auth',['except'=>'show']);//除了show方法,其他方法要先验证是否登录,就是游客只能访问show
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +65,10 @@ class UsersController extends Controller
     public function edit($id)
     {
         //
+
         $user = User::find($id);
+        //授权策略,第一个参数是策略类的update方法,第二个参数是要修改的用户信息
+        $this->authorize('update',$user);
         return view('users.edit',compact('user'));
     }
 
@@ -75,9 +81,12 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request,ImageUploadHandler $uploader, $id)
     {
-        //
 
         $user = User::find($id);
+
+        //授权策略,第一个参数是策略类的update方法,第二个参数是要修改的用户信息
+        $this->authorize('update',$user);
+
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->introduce = $request->get('introduce');
