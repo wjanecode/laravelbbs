@@ -52,7 +52,7 @@ class UsersController extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id);
+        $user = User::with('post')->find($id);
         return view('users.show',compact('user'));
     }
 

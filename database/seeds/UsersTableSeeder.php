@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         //
 
-        $users = factory(User::class)->times(50)->make()->each(function ($user, $index) {
+        $users = factory(User::class)->times(10)->make()->each(function ($user, $index) {
 
         });
 

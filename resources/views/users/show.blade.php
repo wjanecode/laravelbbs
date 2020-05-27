@@ -26,11 +26,22 @@
                     <h1 ><strong>{{ $user->name }} </strong>&nbsp;<em>{{ $user->email }}</em></h1>
                 </div>
             </div>
-            <div class="card" >
+
+            <div class="card">
                 <div class="card-body">
-                    <p>暂无数据</p>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active bg-transparent" href="#">Ta 的帖子</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Ta 的回复</a></li>
+                    </ul>
+                    {{--用户最新发布的帖子,可以模板内传参,重新构建查询语句--}}
+                    @include('users._posts_list',['posts'=>$user->post()->recent()->paginate(10)])
+                    {{--用户回复的帖子--}}
                 </div>
             </div>
+
+
+
+
         </div>
     </div>
 @stop
