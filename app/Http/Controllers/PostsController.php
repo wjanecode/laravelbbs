@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -28,13 +30,17 @@ class PostsController extends Controller
 
 	public function create(Post $post)
 	{
-		return view('posts.create_and_edit', compact('post'));
+	    $categories = Category::all();
+
+		return view('posts.create_and_edit', compact('post','categories'));
 	}
 
-	public function store(PostRequest $request)
+	public function store(PostRequest $request,Post $post)
 	{
-		$post = Post::create($request->all());
-		return redirect()->route('posts.show', $post->id)->with('message', 'Created successfully.');
+		$post->fill($request->all());
+		$post->user_id = Auth::id();
+		$post->save();
+		return redirect()->route('posts.show', $post->id)->with('message', '帖子创建成功');
 	}
 
 	public function edit(Post $post)
