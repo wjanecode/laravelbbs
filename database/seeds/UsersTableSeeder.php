@@ -13,7 +13,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
+
         $users = factory(User::class)->times(50)->make()->each(function ($user, $index) {
+
         });
 
         // 让隐藏字段可见，并将数据集合转换为数组

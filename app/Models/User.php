@@ -36,4 +36,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 一多关联,用户用户多个帖子
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function post(  ) {
+        return $this->hasMany(Post::class);
+    }
 }

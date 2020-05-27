@@ -1,5 +1,5 @@
 <footer class="panel-footer" style="width: 100%; overflow: hidden;">
-    <div class="container">
+    <div class="col-10 offset-1">
         <div class="row footer-top" style="text-align: center;">
 
         </div>

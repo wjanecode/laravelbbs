@@ -27,5 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'introduce' => $faker->sentence,
         'created_at' => now(),
         'updated_at' => now(),
+        'avatar' => 'upload/images/avatar/202005/27/avatar-10-21-048608.png'
     ];
 });

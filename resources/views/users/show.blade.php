@@ -12,7 +12,7 @@
                <p class="card-text">{{ $user->introduce }}</p>
                <h5><strong>加入时间</strong></h5>
                  <p>{{ $user->created_at->diffForHumans() }}</p>
-               <a href="{{ route('users.edit',Auth::id()) }}" class="btn btn-primary">修改信息</a>
+               <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary">修改信息</a>
              </div>
            </div>
         </div>
