@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','帖子')
 @section('content')
 <div class="row">
   <div class="col-md-9 ">
@@ -15,8 +15,8 @@
 
           <div class="card-header bg-transparent">
               <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#">最后回复</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">最新发布</a></li>
+                  <li class="nav-item"><a class="nav-link @if(request('order') !== 'recent') active @endif" href="{{ request()->url().'?order=reply' }}">最后回复</a></li>
+                  <li class="nav-item"><a class="nav-link @if(request('order') === 'recent') active @endif" href="{{ request()->url().'?order=recent' }}">最新发布</a></li>
               </ul>
           </div>
 

@@ -5,7 +5,7 @@
         <li class="media">
             <div class="media-left">
                 <a href="{{ route('users.show', [$post->user_id]) }}">
-                    <img class="media-object img-thumbnail mr-3" style="width: 52px; height: 52px;" src="{{ $post->user->avatar }}" title="{{ $post->user->name }}">
+                    <img class="media-object img-thumbnail mr-3" style="width: 52px; height: 52px;" src="{{ asset($post->user->avatar)}}" title="{{ $post->user->name }}">
                 </a>
             </div>
             <div class="media-body">
@@ -14,7 +14,7 @@
                 <a href="{{ route('posts.show',$post->id) }}"><h4 class="media-heading">{{ $post->title}}</h4></a>
                 <small class="media-body meta text-secondary">
 
-                    <a class="text-secondary" href="#" title="{{ $post->category->name }}">
+                    <a class="text-secondary" href="{{ route('categories.show',$post->category->id) }}" title="{{ $post->category->name }}">
                         <i class="far fa-folder"></i>
                         {{ $post->category->name }}
                     </a>

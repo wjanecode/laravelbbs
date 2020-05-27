@@ -5,15 +5,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">首页<span class="sr-only">(current)</span></a>
+            <li class="nav-item ">
+                <a class="nav-link @if(request()->url() ===  route('posts.index')) active @endif" href="{{ route('posts.index') }}">首页<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">分类</a>
+            @foreach(\App\Models\Category::all() as $cate)
+            <li class="nav-item @if(request()->url() === route('categories.show',$cate->id)) active @endif">
+                <a class="nav-link" href="{{ route('categories.show',$cate->id) }}">{{$cate->name}}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            @endforeach
+
         </ul>
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="搜索">

@@ -21,4 +21,29 @@ class Post extends Model
     public function category(  ) {
         return $this->belongsTo(Category::class,'category_id');
     }
+
+    //scope范围查询限定
+    public function scopeWithOrder($query,$order) {
+        switch ($order){
+            //最新发布
+            case 'resent':
+                $query->recent();
+                break;
+            //最新回复
+            case 'reply':
+                $query->recentReply();
+                break;
+            //没有限制直接返回查询
+            default:
+                return $query;
+        }
+    }
+    //最新发布
+    public function scopeRecent($query) {
+        return $query->orderBy('created_at','desc');
+    }
+    //最新回复
+    public function scopeRecentReply($query) {
+        return $query->orderBy('updated_at','desc');
+    }
 }
