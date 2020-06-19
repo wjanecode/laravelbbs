@@ -67,6 +67,7 @@ class PostsController extends Controller
      */
 	public function store(PostRequest $request,Post $post)
 	{
+        $request->body = clean($request->body, 'default');//对HTML内容进行过滤,purifier 防止注入攻击
 		$post->fill($request->all());
 		$post->user_id = Auth::id();
 		$post->save();
@@ -97,6 +98,8 @@ class PostsController extends Controller
 	public function update(PostRequest $request, Post $post)
 	{
 		$this->authorize('update', $post);
+
+        $request->body = clean($request->body, 'default');//对HTML内容进行过滤,purifier 防止注入攻击
 		$post->update($request->all());
 
 		return redirect()->route('posts.show', $post->id)->with('message', 'Updated successfully.');
