@@ -10,7 +10,7 @@
             </li>
             @foreach(\App\Models\Category::all() as $cate)
             <li class="nav-item @if(request()->url() === route('categories.show',$cate->id)) active @endif">
-                <a class="nav-link" href="{{ route('categories.show',$cate->id) }}">{{$cate->name}}</a>
+                <a class="nav-link" href="{{ route('categories.show',['category'=>$cate->id,'order'=>'reply']) }}">{{$cate->name}}</a>
             </li>
             @endforeach
 

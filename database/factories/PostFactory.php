@@ -12,7 +12,6 @@ $factory->define(App\Models\Post::class, function (Faker $faker) {
         // 'name' => $faker->name,
         'title' => $faker->sentence,
         'body' => $faker->text,
-
         'created_at' => $created_at,
         'updated_at' => $updated_at
     ];
