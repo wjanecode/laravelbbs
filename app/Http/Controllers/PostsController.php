@@ -83,8 +83,9 @@ class PostsController extends Controller
      */
 	public function edit(Post $post)
 	{
-        $this->authorize('update', $post);
-		return view('posts.create_and_edit', compact('post'));
+        $this->authorize('update', $post);//策略授权
+        $categories = Category::all();
+		return view('posts.create_and_edit', compact('post','categories'));
 	}
 
     /**
@@ -117,7 +118,7 @@ class PostsController extends Controller
 		$this->authorize('destroy', $post);
 		$post->delete();
 
-		return redirect()->route('posts.index')->with('message', 'Deleted successfully.');
+		return redirect()->route('posts.index')->with('success', '删除成功!');
 	}
 
     /**

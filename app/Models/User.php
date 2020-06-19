@@ -44,4 +44,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function post(  ) {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * 模型从属,判断模型是否属于该用户
+     * @param $model
+     *
+     * @return bool
+     */
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
+    }
 }

@@ -26,8 +26,8 @@ class Post extends Model
     public function scopeWithOrder($query,$order) {
         switch ($order){
             //最新发布
-            case 'resent':
-                $query->recent();
+            case 'recent':
+                $query->recentPublish();
                 break;
             //最新回复
             case 'reply':
@@ -39,7 +39,7 @@ class Post extends Model
         }
     }
     //最新发布
-    public function scopeRecent($query) {
+    public function scopeRecentPublish($query) {
         return $query->orderBy('created_at','desc');
     }
     //最新回复
