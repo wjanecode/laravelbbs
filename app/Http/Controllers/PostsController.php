@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Handler\SlugTranslateHandler;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Category;
 use App\Models\Post;
@@ -67,9 +68,18 @@ class PostsController extends Controller
      */
 	public function store(PostRequest $request,Post $post)
 	{
+	    //xss过滤
         $request->body = clean($request->body, 'default');//对HTML内容进行过滤,purifier 防止注入攻击
 		$post->fill($request->all());
 		$post->user_id = Auth::id();
+
+		//生成摘录
+		$post->excerpt = make_excerpt($request->body);
+
+		//生成slug,对seo友好的链接
+        //app()服务容器,依赖注入的简便写法
+        $post->slug = app(SlugTranslateHandler::class)->translate($request->title);
+
 		$post->save();
 		return redirect()->route('posts.show', $post->id)->with('message', '帖子创建成功');
 	}
@@ -100,7 +110,15 @@ class PostsController extends Controller
 	{
 		$this->authorize('update', $post);
 
+        //xss漏洞
         $request->body = clean($request->body, 'default');//对HTML内容进行过滤,purifier 防止注入攻击
+
+        //生成摘录
+        $request->excerpt = make_excerpt($request->body);
+
+        //更新slug,对seo友好的链接
+        //app()服务容器,依赖注入的简便写法
+        $request->slug = app(SlugTranslateHandler::class)->translate($request->title);
 		$post->update($request->all());
 
 		return redirect()->route('posts.show', $post->id)->with('message', 'Updated successfully.');
