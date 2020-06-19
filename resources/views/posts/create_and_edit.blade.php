@@ -6,26 +6,26 @@
 
 @section('js')
     {{--editor js注意顺序--}}
-    <script src="{{ asset('js/module.min.js') }}"></script>
-    <script src="{{ asset('js/hotkeys.min.js') }}"></script>
-    <script src="{{ asset('js/simditor.min.js') }}"></script>
-    <script src="{{ asset('js/uploader.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/module.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
     <script>
         $(document).ready(function() {
             var editor = new Simditor({
                 textarea: $('#editor'),
                 upload: {
-                    url: '{{ route('posts.upload_image') }}',
+                    url: '{{ route('posts.upload_image') }}',//上传图片url
                     params: {
-                        _token: '{{ csrf_token() }}'
+                        _token: '{{ csrf_token() }}',//单提交的参数，Laravel 的 POST 请求必须带防止 CSRF 跨站请求伪造的 _token 参数；
                     },
-                    fileKey: 'upload_file',
-                    connectionCount: 3,
-                    leaveConfirm: '文件上传中，关闭此页面将取消上传。'
+                    fileKey: 'upload_file',//是服务器端获取图片的键值，我们设置为 upload_file;
+                    connectionCount: 3,//最多只能同时上传 3 张图片；
+                    leaveConfirm: '文件上传中，关闭此页面将取消上传。'//上传过程中，用户关闭页面时的提醒。
                 },
-                pasteImage: true,
+                pasteImage: true,//设定是否支持图片黏贴上传，这里我们使用 true 进行开启
             });
-            });
+
         });
     </script>
 @stop

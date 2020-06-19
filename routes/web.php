@@ -42,6 +42,6 @@ Route::resource('users','UsersController')->only('show','update','edit');
 //帖子
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 //帖子图片上传
-Route::post('posts_upload_image','PostsController@upload_image')->name('posts.upload_image');
+Route::post('posts_upload_image','PostsController@uploadImage')->name('posts.upload_image');
 //分类
 Route::resource('categories','CategoriesController',['only'=>['show']]);
