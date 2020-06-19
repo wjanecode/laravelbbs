@@ -4,7 +4,5 @@
 首页
 @stop
 @section('content')
-    <p>
-    dfvsd
-    </p>
+
 @stop

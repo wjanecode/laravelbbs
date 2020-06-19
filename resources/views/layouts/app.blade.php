@@ -17,6 +17,7 @@
 
 
     <title>@yield('title','首页')-switch论坛</title>
+    <meta name="description" content="@yield('description', 'switch 爱好者社区')" />
 </head>
 <body>
 <!--自定义函数获取路由名称来赋对应的class样式-->

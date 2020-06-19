@@ -1,63 +1,62 @@
 @extends('layouts.app')
-
+@section('title',isset($category)? $category->name : '帖子')
+@section('description',$post->excerpt)
 @section('content')
+    <div class="row">
+        <div class="col-md-3">
+            {{--左栏--}}
 
-<div class="container">
-  <div class="col-md-10 offset-md-1">
-    <div class="card ">
-      <div class="card-header">
-        <h1>Post / Show #{{ $post->id }}</h1>
-      </div>
+            <div class="card">
+                <img class="card-img-top" src="{{asset($post->user->avatar)}}"  alt="头像">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>作者简介</strong></h5>
+                    <p class="card-text">{{ $post->user->introduce }}</p>
+                    <h5><strong>加入时间</strong></h5>
+                    <p>{{ $post->user->created_at->diffForHumans() }}</p>
+                    @if(Auth::id() === $post->user->id)
+                        <a href="{{ route('users.edit',$post->user->id) }}" class="btn btn-primary">修改信息</a>
+                    @endif
+                </div>
+            </div>
 
-      <div class="card-body">
-        <div class="card-block bg-light">
-          <div class="row">
-            <div class="col-md-6">
-              <a class="btn btn-link" href="{{ route('posts.index') }}"><- Back</a>
-            </div>
-            <div class="col-md-6">
-              <a class="btn btn-sm btn-warning float-right mt-1" href="{{ route('posts.edit', $post->id) }}">
-                Edit
-              </a>
-            </div>
-          </div>
         </div>
-        <br>
+        <div class="col-md-9 ">
 
-        <label>Title</label>
-<p>
-	{{ $post->title }}
-</p> <label>Body</label>
-<p>
-	{{ $post->body }}
-</p> <label>User_id</label>
-<p>
-	{{ $post->user_id }}
-</p> <label>Category_id</label>
-<p>
-	{{ $post->category_id }}
-</p> <label>Reply_count</label>
-<p>
-	{{ $post->reply_count }}
-</p> <label>View_count</label>
-<p>
-	{{ $post->view_count }}
-</p> <label>Last_reply_user_id</label>
-<p>
-	{{ $post->last_reply_user_id }}
-</p> <label>Order</label>
-<p>
-	{{ $post->order }}
-</p> <label>Excerpt</label>
-<p>
-	{{ $post->excerpt }}
-</p> <label>Slug</label>
-<p>
-	{{ $post->slug }}
-</p>
-      </div>
+            <div class="card ">
+                <div class="card-header">
+                    <h1 class="text-center mt-3 mb-3">
+                        {{ $post->title }}
+                    </h1>
+                    <div>
+                        <div class="article-meta text-center text-secondary">
+                            {{ $post->category->name }}
+                            ·
+                            {{ $post->created_at->diffForHumans() }}
+                            ·
+                            <i class="far fa-comment"></i>
+                            {{ $post->reply_count }}
+                        </div>
+                        @if(Auth::id() === $post->user->id)
+                        <span>
+                            <div class="operate" style="float: right">
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
+                                <i class="far fa-edit"></i> 编辑
+                            </a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm" role="button">
+                                <i class="far fa-trash-alt"></i> 删除
+                            </a>
+                        </div>
+                        </span>
+                        @endif
+
+                    </div>
+
+                </div>
+                <div class="card-body simditor-body">
+                    {!! $post->body !!}
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
-</div>
-
 @endsection

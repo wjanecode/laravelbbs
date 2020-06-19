@@ -39,6 +39,8 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
+        //意此处使用 Laravel 的 『隐性路由模型绑定』 功能，
+        //当请求 larabbs.test/topics/1 时，$topic 变量会自动解析为 ID 为 1 的帖子对象。
 
         return view('posts.show', compact('post'));
     }
@@ -138,14 +140,12 @@ class PostsController extends Controller
             $result = $uploader->upload($file,'post','post_img');
             //如果保存成功,修改返回数据
             if ($result) {
-                $data['file_path'] =asset($result['path']);
+                $data['file_path'] =asset($result['path']);//直接返回完整路径,不然会显示错误
                 $data['msg']       = "上传成功!";
                 $data['success']   = true;
             }
         }
         //返回结果,编辑器要求的是json格式,laravel会自动把返回的数组转json
         return $data;
-
 	}
-
 }

@@ -24,3 +24,8 @@
 
 //post样式
 @import 'post';
+
+//帖子图片最大不超出范围
+.simditor-body img {
+    max-width:100%;
+}
