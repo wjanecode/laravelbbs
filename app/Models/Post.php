@@ -7,7 +7,7 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'user_id', 'category_id',  'last_reply_user_id', 'excerpt', 'slug'];
 
     /**
-     * 一对一
+     * 一对一,一个帖子属于一个用户
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(  ) {
@@ -15,11 +15,19 @@ class Post extends Model
     }
 
     /**
-     * 一对一
+     * 一对一 一个帖子属于一个分类
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category(  ) {
         return $this->belongsTo(Category::class,'category_id');
+    }
+
+    /**
+     * 一对多,一个贴子拥有多个回复
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function replies(  ) {
+        return $this->hasMany(Reply::class,'post_id','id');
     }
 
     //scope范围查询限定

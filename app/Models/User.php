@@ -38,11 +38,19 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * 一多关联,用户用户多个帖子
+     * 一多关联,用户用户拥有多个帖子
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function post(  ) {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * 一对多,一个用户拥有多个回复
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function replies(  ) {
+        return $this->hasMany(Reply::class,'user_id','id');
     }
 
     /**
