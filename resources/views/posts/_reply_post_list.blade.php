@@ -7,12 +7,11 @@
                 <a href="{{ route('users.show',[$reply->user->id,'tab'=>'replies']) }}">
                     <img class="media-object reply-avatar" src="{{ asset($reply->user->avatar) }}" alt="" >
                 </a>
-
-
             </div>
             <div class="media-body">
                 <div>
                     <strong> <a href="{{ route('users.show',[$reply->user->id,'tab'=>'replies']) }}">{{$reply->user->name}} </a></strong> -- <span>{{$reply->created_at->diffForHumans()}}</span>
+                    <div><a href="{{ route('posts.show',[$reply->post_id,'#replies'.$reply->id]) }}"></a></div>
                     <div style="float: right">
                         @can('destroy',$reply)
                         <form action="{{ route('replies.destroy', $reply->id) }}"

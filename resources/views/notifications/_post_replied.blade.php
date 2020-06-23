@@ -16,8 +16,9 @@
         {{ $notification->created_at->diffForHumans() }}
       </span>
         </div>
-        {{-- 回复删除按钮 浮动右边 --}}
+        {{-- 回复删除按钮 浮动右边,先检查是否已删除 --}}
         <div style="float: right">
+        @if(\App\Models\Reply::find($notification->data['reply_id']))
             <form action="{{ route('replies.destroy', $notification->data['reply_id']) }}"
                   method="post"
                   style="display: inline-block;"
@@ -28,9 +29,12 @@
                     <i class="far fa-trash-alt"></i> 删除回复
                 </button>
             </form>
-
+        @else
+            <button type="submit" class="btn btn-outline-secondary btn-sm">
+                <i class="far fa-trash-alt"></i> 该回复已删除
+            </button>
+        @endif
         </div>
-
 
         <div class="reply-content">
             {!! $notification->data['reply_content'] !!}

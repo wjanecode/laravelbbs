@@ -67,7 +67,7 @@ class PostReplied extends Notification
 
         //用数据库来通知数组会转成json格式保存到data字段
         $post = $this->reply->post;
-        $link = route('posts.show',[$post->id,'replies'=>$this->reply->id]);
+        $link = route('posts.show',[$post->id,'#replies'.$this->reply->id]);
 
         return [
             'reply_id' => $this->reply->id,
