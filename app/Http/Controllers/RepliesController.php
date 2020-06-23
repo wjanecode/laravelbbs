@@ -11,7 +11,7 @@ class RepliesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);//权限检查,没登录不允许修改保存删除
     }
 
 	public function index()
@@ -25,15 +25,16 @@ class RepliesController extends Controller
         return view('replies.show', compact('reply'));
     }
 
-	public function create(Reply $reply)
-	{
-		return view('replies.create_and_edit', compact('reply'));
-	}
 
-	public function store(ReplyRequest $request)
+
+	public function store(ReplyRequest $request,Reply $reply)
 	{
-		$reply = Reply::create($request->all());
-		return redirect()->route('replies.show', $reply->id)->with('message', 'Created successfully.');
+        $reply->content = $request->get('content');
+		$reply->post_id = $request->get('post_id');
+		$reply->user_id = \Auth::id();
+
+		$reply->save();
+		return back()->with('success', '回复成功');
 	}
 
 	public function edit(Reply $reply)
@@ -44,7 +45,7 @@ class RepliesController extends Controller
 
 	public function update(ReplyRequest $request, Reply $reply)
 	{
-		$this->authorize('update', $reply);
+		$this->authorize('update', $reply);//权限策略,本人可以更新本人的,其他人不允许修改
 		$reply->update($request->all());
 
 		return redirect()->route('replies.show', $reply->id)->with('message', 'Updated successfully.');
@@ -55,6 +56,6 @@ class RepliesController extends Controller
 		$this->authorize('destroy', $reply);
 		$reply->delete();
 
-		return redirect()->route('replies.index')->with('message', 'Deleted successfully.');
+		return back()->with('success', '回复删除成功');
 	}
 }

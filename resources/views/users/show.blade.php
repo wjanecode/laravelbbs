@@ -27,17 +27,23 @@
                 </div>
             </div>
 
+            {{--用户帖子和回复--}}
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active bg-transparent" href="#">Ta 的帖子</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Ta 的回复</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab', null)) }} bg-transparent" href="{{ route('users.show',$user->id) }}">Ta 的帖子</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab','replies')) }}" href="{{ route('users.show',[$user->id,'tab'=>'replies']) }}">Ta 的回复</a></li>
                     </ul>
-                    {{--用户最新发布的帖子,可以模板内传参,重新构建查询语句--}}
-                    @include('users._posts_list',['posts'=>$user->post()->recent()->paginate(10)])
-                    {{--用户回复的帖子--}}
+                    @if(if_query('tab','replies'))
+                        {{--用户回复的帖子--}}
+                        @include('users._reply_user_list',['replies'=>$user->replies()->with('post','user')->recent()->paginate(10)])
+                    @else
+                        {{--用户最新发布的帖子,可以模板内传参,重新构建查询语句--}}
+                        @include('users._posts_list',['posts'=>$user->post()->recent()->paginate(10)])
+                    @endif
                 </div>
             </div>
+
 
 
 

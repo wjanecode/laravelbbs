@@ -54,4 +54,11 @@ class Post extends Model
     public function scopeRecentReply($query) {
         return $query->orderBy('updated_at','desc');
     }
+
+    //更新回复统计
+    public function updateRepliesCount(  ) {
+
+        $this->reply_count = $this->replies->count();
+        $this->save();
+    }
 }

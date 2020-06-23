@@ -45,5 +45,5 @@ Route::resource('posts', 'PostsController', ['only' => ['index', 'show', 'create
 Route::post('posts_upload_image','PostsController@uploadImage')->name('posts.upload_image');
 //分类
 Route::resource('categories','CategoriesController',['only'=>['show']]);
-
+//回复
 Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);

@@ -28,7 +28,7 @@ class PostsController extends Controller
      */
 	public function index()
 	{
-		$posts = Post::withOrder(\request('order'))->with('user','category')->paginate();
+		$posts = Post::withOrder(\request('order'))->with('user','category','replies')->paginate();
 		return view('posts.index', compact('posts'));
 	}
 
@@ -38,10 +38,11 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Post $post)
+    public function show($id)
     {
         //意此处使用 Laravel 的 『隐性路由模型绑定』 功能，
         //当请求 larabbs.test/topics/1 时，$topic 变量会自动解析为 ID 为 1 的帖子对象。
+        $post = Post::with('replies')->find($id);
 
         return view('posts.show', compact('post'));
     }
@@ -68,7 +69,7 @@ class PostsController extends Controller
      */
 	public function store(PostRequest $request,Post $post)
 	{
-
+	    //内容过滤等操作在观察者那里做
 		$post->fill($request->all());
 		$post->user_id = Auth::id();
 

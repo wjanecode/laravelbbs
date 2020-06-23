@@ -9,13 +9,23 @@ use App\Models\Reply;
 
 class ReplyObserver
 {
-    public function creating(Reply $reply)
+
+    public function saving(Reply $reply)
     {
-        //
+        // XSS 过滤,使用默认配置
+        $reply->content = clean($reply->content, 'default');
+
     }
 
-    public function updating(Reply $reply)
-    {
-        //
+    public function saved(Reply $reply) {
+        //帖子重新统计回复数
+        $reply->post->updateRepliesCount();
+
+    }
+
+    public function deleted(Reply $reply) {
+
+        //帖子重新统计回复数
+        $reply->post->updateRepliesCount();
     }
 }

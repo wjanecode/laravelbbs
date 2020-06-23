@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Post;
+use App\Models\Reply;
 use App\Observers\PostObserver;
+use App\Observers\ReplyObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         //注册模型观察者
         Post::observe(PostObserver::class);
+        Reply::observe(ReplyObserver::class);
     }
 }

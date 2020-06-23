@@ -13,6 +13,7 @@ class ReplyRequest extends Request
             {
                 return [
                     // CREATE ROLES
+                    'content' => 'required'
                 ];
             }
             // UPDATE
@@ -36,6 +37,7 @@ class ReplyRequest extends Request
     {
         return [
             // Validation messages
+            'content.required' => '回复内容不能为空'
         ];
     }
 }

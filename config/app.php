@@ -180,6 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //验证码
         Mews\Captcha\CaptchaServiceProvider::class,
+        //导航栏切换
+        HieuLe\Active\ActiveServiceProvider::class,
 
     ],
 
@@ -233,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Active' => HieuLe\Active\Facades\Active::class,
 
     ],
 

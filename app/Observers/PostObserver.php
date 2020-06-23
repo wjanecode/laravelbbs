@@ -26,5 +26,11 @@ class PostObserver
         dispatch( new TranslateSlug( $post ) );
     }
 
+    public function deleted(Post $post) {
+
+        //删除帖子,把关联的回复都删除
+        \DB::table('replies')->where('post_id','=',$post->id)->delete();
+    }
+
 
 }
