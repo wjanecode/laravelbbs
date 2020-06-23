@@ -74,6 +74,7 @@ class PostReplied extends Notification
             'reply_content' => $this->reply->content,
             'reply_created_at' => $this->reply->created_at,
             'user_id' => $this->reply->user_id,
+            'user_name' => $this->reply->user->name,
             'user_avatar' => $this->reply->user->avatar,
             'post_id' => $post->id,
             'post_title' => $post->title,

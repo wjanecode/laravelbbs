@@ -17,9 +17,12 @@ class ReplyObserver
         //向作者发送回复通知
         $user = $reply->post->user;
         $user->notify(new PostReplied($reply));
-        //通知数量加一
-        $user->increment('notification_count');
-        $user->save();
+        //通知数量加一,自己给自己的回复不通知
+        if (\Auth::id() != $user->id){
+            $user->increment('notification_count');
+            $user->save();
+        }
+
 
     }
 

@@ -47,3 +47,5 @@ Route::post('posts_upload_image','PostsController@uploadImage')->name('posts.upl
 Route::resource('categories','CategoriesController',['only'=>['show']]);
 //回复
 Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+//消息通知
+Route::resource('notifications','NotificationsController',['only'=>['index']]);

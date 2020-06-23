@@ -16,17 +16,25 @@
 
         </ul>
         <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="搜索">
+            <input class="form-control mr-auto" type="text" placeholder="搜索" aria-label="搜索">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
         </form>
 
         <ul class="navbar-nav navbar-right">
             <!-- Authentication Links -->
             @if( !Auth::check())
-            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                <div class="">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                </div>
+
             @else
-            <div class="dropdown open">
+            <div>
+                <a class="nav-link mr-2 ml-2 " style="color: red" href="{{ route('notifications.index') }}">
+                    未读 * {{ Auth::user()->notification_count }}
+                </a>
+            </div>
+            <div class="dropdown open mr-2">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
@@ -35,6 +43,7 @@
                     <a class="dropdown-item" href="{{ route('logout') }}">注销</a>
                 </div>
             </div>
+
 
             @endif
         </ul>
