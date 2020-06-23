@@ -2,6 +2,49 @@
 
 namespace App\Models;
 
+/**
+ * App\Models\Post
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $body
+ * @property int $user_id
+ * @property int $category_id
+ * @property int $reply_count
+ * @property int $view_count
+ * @property int $last_reply_user_id
+ * @property int $order
+ * @property string|null $excerpt
+ * @property string|null $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
+ * @property-read int|null $replies_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model ordered()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model recent()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post recentPublish()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post recentReply()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereExcerpt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereLastReplyUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereReplyCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post whereViewCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post withOrder($order)
+ * @mixin \Eloquent
+ */
 class Post extends Model
 {
     protected $fillable = ['title', 'body', 'user_id', 'category_id',  'last_reply_user_id', 'excerpt', 'slug'];
