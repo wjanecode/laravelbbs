@@ -39,7 +39,8 @@
                             <i class="far fa-comment"></i>
                             {{ $post->reply_count }}
                         </div>
-                        @if(Auth::id() === $post->user->id)
+                        {{--权限判断 blade自带,授权策略判断用户是否能执行方法--}}
+                        @can('destroy',$post)
                         <span>
                             <div class="operate" style="float: right">
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
@@ -58,7 +59,7 @@
 
                         </div>
                         </span>
-                        @endif
+                        @endcan
                     </div>
 
                 </div>

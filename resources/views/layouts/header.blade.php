@@ -23,28 +23,25 @@
         <ul class="navbar-nav navbar-right">
             <!-- Authentication Links -->
             @if( !Auth::check())
-                <div class="">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
-                </div>
+
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
 
             @else
-            <div>
-                <a class="nav-link mr-2 ml-2 " style="color: red" href="{{ route('notifications.index') }}">
-                    未读 * {{ Auth::user()->notification_count }}
-                </a>
-            </div>
-            <div class="dropdown open mr-2">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user()->name }}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{ route('users.show',Auth::id()) }}">个人中心</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}">注销</a>
+                <div>
+                    <a class="nav-link mr-2 ml-2 " style="color: red" href="{{ route('notifications.index') }}">
+                        未读 * {{ Auth::user()->notification_count }}
+                    </a>
                 </div>
-            </div>
-
-
+                <div class="dropdown open mr-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ route('users.show',Auth::id()) }}">个人中心</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}">注销</a>
+                    </div>
+                </div>
             @endif
         </ul>
 

@@ -32,8 +32,14 @@
     </div>
     <!--底部模块-->
     @include('layouts.footer')
+
+
 </div>
 
+{{--开启多用户登录切换,单独放出来,放到上面div里面报错---}}
+@if (app()->isLocal())
+    @include('sudosu::user-selector')
+@endif
 
 <script>
     //下拉菜单
@@ -43,6 +49,8 @@
     const app = new Vue({
         el: '#app',
     });
+
+
 </script>
 @yield('js')
 
