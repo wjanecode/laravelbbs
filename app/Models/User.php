@@ -112,5 +112,25 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->unreadNotifications->markAsRead();
     }
 
+    /**
+     * eloquent修改器
+     * 方法格式setXXXAttribute($value)
+     * 保存该字段时会自动调用修改器方法,对该值进行格式化
+     * 访问器 getXXXAttribute(),用于临时取出数据
+     * @param $value
+     */
+    public function setPasswordAttribute( $value ) {
+
+        //果然密码长度等于60,就是已经执行加密了
+        //对未加密的进行加密
+        if(strlen($value) != 60){
+            $value =bcrypt($value);
+        }
+
+        //保存值,attributes[]数组
+        $this->attributes['password'] = $value;
+
+    }
+
 
 }
