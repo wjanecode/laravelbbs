@@ -136,7 +136,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         //administrator插件保存头像不保存路径,处理一下,确保所有入库的头像带路径
         //没找到路径分隔符
-        if(! strchr($value,'/')){
+        if(! (strchr($value,'/') || strchr($value,'\\')) ){
             //补全路径
             $value = '/upload/images/avatar/'.$value;
         }
