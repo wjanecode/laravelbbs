@@ -6,6 +6,7 @@ use App\Handler\SlugTranslateHandler;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
@@ -29,7 +30,9 @@ class PostsController extends Controller
 	public function index()
 	{
 		$posts = Post::withOrder(\request('order'))->with('user','category','replies')->paginate();
-		return view('posts.index', compact('posts'));
+		$user = new User();
+		$active_users = $user->addActiveUser();
+		return view('posts.index', compact('posts','active_users'));
 	}
 
     /**
@@ -43,8 +46,9 @@ class PostsController extends Controller
         //意此处使用 Laravel 的 『隐性路由模型绑定』 功能，
         //当请求 larabbs.test/topics/1 时，$topic 变量会自动解析为 ID 为 1 的帖子对象。
         $post = Post::with('replies')->find($id);
-
-        return view('posts.show', compact('post'));
+        $user = new User();
+        $active_users = $user->addActiveUser();
+        return view('posts.show', compact('post','active_users'));
     }
 
     /**

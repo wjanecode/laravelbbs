@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ActiveUserTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;//权限拓展包的所有方法
+    use ActiveUserTrait;//活跃用户
 
     /**
      * The attributes that are mass assignable.
@@ -141,7 +143,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $value = '/upload/images/avatar/'.$value;
         }
         $this->attributes['avatar'] = $value;
-
     }
 
 

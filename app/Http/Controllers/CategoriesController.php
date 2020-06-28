@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -52,7 +53,10 @@ class CategoriesController extends Controller
         $posts = Post::withOrder(\request('order'))
                      ->with('user','category')
                      ->where('category_id','=',$category->id)->paginate(15);
-        return view('posts.index',compact('posts','category'));
+        $user = new User();
+        $active_users = $user->addActiveUser();
+
+        return view('posts.index',compact('posts','category','active_users'));
     }
 
     /**
