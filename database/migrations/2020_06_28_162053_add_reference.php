@@ -14,7 +14,7 @@ class AddReference extends Migration
     public function up()
     {
         //
-        Schema::table('post',function (Blueprint $table){
+        Schema::table('posts',function (Blueprint $table){
            //添加外键约束,删除用户时删除用户帖子
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -42,6 +42,6 @@ class AddReference extends Migration
         Schema::table('replies',function (Blueprint $table){
             $table->dropForeign('user_id');
             $table->dropForeign('post_id');
-        })
+        });
     }
 }

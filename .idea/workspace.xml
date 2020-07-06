@@ -17,6 +17,9 @@
       <executable />
     </execution>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="laravelbbs" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -206,7 +209,8 @@
       <workItem from="1590488998848" duration="22481000" />
       <workItem from="1592373732783" duration="24513000" />
       <workItem from="1592566240728" duration="4272000" />
-      <workItem from="1592888286591" duration="56641000" />
+      <workItem from="1592888286591" duration="59373000" />
+      <workItem from="1593970588543" duration="1501000" />
     </task>
     <servers />
   </component>
