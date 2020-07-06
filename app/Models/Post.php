@@ -84,9 +84,9 @@ class Post extends Model
             case 'reply':
                 $query->recentReply();
                 break;
-            //没有限制直接返回查询
+            //没有限制返回最新回复,跟前端布局一致
             default:
-                return $query;
+                return $query->recentReply();
         }
     }
     //最新发布

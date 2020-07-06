@@ -80,7 +80,7 @@
                         </div>
                         {{--回复列表--}}
                         <div >
-                            @include('posts._reply_post_list',['replies' => $post->replies()->with('user')->recent()->paginate(10)])
+                            @include('posts._reply_post_list',['replies' => $post->replies()->with('user','post')->recent()->paginate(10)])
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ class RepliesController extends Controller
 
 	public function index()
 	{
-		$replies = Reply::paginate();
+		$replies = Reply::with('post_id')->paginate();
 		return view('replies.index', compact('replies'));
 	}
 

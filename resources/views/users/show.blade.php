@@ -8,6 +8,8 @@
            <div class="card">
              <img class="card-img-top" src="{{asset($user->avatar)}}"  alt="头像">
              <div class="card-body">
+                 <h1 ><strong>{{ $user->name }} </strong>&nbsp;</h1>
+                 <p><em>{{ $user->email }}</em></p>
                <h5 class="card-title"><strong>个人简介</strong></h5>
                <p class="card-text">{{ $user->introduce }}</p>
                <h5><strong>加入时间</strong></h5>
@@ -24,18 +26,14 @@
         {{--发布的内容--}}
         <div class="col-md-9">
 
-            <div class="card" >
-                <div class="card-body">
-                    <h1 ><strong>{{ $user->name }} </strong>&nbsp;<em>{{ $user->email }}</em></h1>
-                </div>
-            </div>
+
 
             {{--用户帖子和回复--}}
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab', null)) }} bg-transparent" href="{{ route('users.show',$user->id) }}">Ta 的帖子</a></li>
-                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab','replies')) }}" href="{{ route('users.show',[$user->id,'tab'=>'replies']) }}">Ta 的回复</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab', null)) }} bg-transparent" href="{{ route('users.show',$user->id) }}">@if(Auth::user()->id === $user->id)我 @else Ta @endif的帖子</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active_class(if_query('tab','replies')) }}" href="{{ route('users.show',[$user->id,'tab'=>'replies']) }}">@if(Auth::user()->id === $user->id)我 @else Ta @endif的回复</a></li>
                     </ul>
                     @if(if_query('tab','replies'))
                         {{--用户回复的帖子--}}

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','PageController@index')->name('index');
+Route::get('/','PostsController@index')->name('index');
 
 //-------------Auth::routes();用户认证相关展开
 // 用户身份验证相关的路由
