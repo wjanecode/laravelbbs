@@ -45,10 +45,9 @@ class PostsController extends Controller
     {
         //意此处使用 Laravel 的 『隐性路由模型绑定』 功能，
         //当请求 larabbs.test/topics/1 时，$topic 变量会自动解析为 ID 为 1 的帖子对象。
-        $post = Post::with('replies')->find($id);
-        $user = new User();
-        $active_users = $user->addActiveUser();
-        return view('posts.show', compact('post','active_users'));
+        $post = Post::with('replies','user')->find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     /**

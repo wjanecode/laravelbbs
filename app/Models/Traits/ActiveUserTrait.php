@@ -1,9 +1,6 @@
 <?php
 namespace App\Models\Traits;
 
-
-use App\Models\Post;
-use App\Models\Reply;
 use Carbon\Carbon;
 use Cache;
 use Arr;
@@ -18,17 +15,16 @@ trait ActiveUserTrait
     // 用于存放临时用户数据
     protected $users = [];
 
-    protected $active_post;
-    protected $active_reply;
     protected $post_weight = 4;//帖子权重
     protected $reply_weight = 1;//回复权重
-    protected $pass_days = 7;//几天内的统计数据
+    protected $pass_days = 30;//几天内的统计数据
     protected $user_number = 6;//取出的用户数
 
     //缓存相关配置
-    protected $cache_key = 'laravel_bbs_active_user';
-    protected $cache_expire_in_seconds = 60*60;
+    protected $cache_key = 'laravel_bbs_active_user';//key
+    protected $cache_expire_in_seconds = 60*60;//expire time
 
+    //取出活跃用户,返回的是活跃用户集合 collection
     public function addActiveUser(  ) {
 
         // 尝试从缓存中取出 cache_key 对应的数据。如果能取到，便直接返回数据。
@@ -38,6 +34,7 @@ trait ActiveUserTrait
         });
     }
 
+    //缓存活跃用户,不返回活跃用户
     public function calculateAndCacheActiveUsers()
     {
         // 取得活跃用户列表
@@ -81,8 +78,7 @@ trait ActiveUserTrait
     private function calculatePostScore(  ) {
         // 从话题数据表里取出限定时间范围（$pass_days）内，有发表过话题的用户
         // 并且同时取出用户此段时间内发布话题的数量
-
-        //sql='select user_id, count(*) as post_count form 'posts' where created_at >= Carbon:now()->subDays(7) groupBy user_id'
+        //sql='select user_id, count(*) as post_count form 'posts' where created_at >= Carbon:now()->subDays(7) group by user_id'
         $post_users = \DB::table('posts')->select(\DB::raw('user_id,count(*) as post_count'))
             ->where('created_at','>=',Carbon::now()->subDays($this->pass_days))
             ->groupBy('user_id')
@@ -98,7 +94,6 @@ trait ActiveUserTrait
 
         //从回复表中获取限定时间内发过回复的用户
         //同时取出该用户此时间内的回复数量
-
         $reply_users = \DB::table('replies')
             ->select(\DB::raw('user_id,count(*) as reply_count'))
             ->where('created_at','>=',Carbon::now()->subDays($this->pass_days))
@@ -111,8 +106,10 @@ trait ActiveUserTrait
 
             //判断帖子统计已存在分数
             if(isset($this->users[$value->user_id])){
+                //存在就相加
                 $this->users[$value->user_id]['score'] += $reply_score;
             }else{
+                //不存在就新增
                 $this->users[$value->user_id]['score'] = $reply_score;
             }
         }

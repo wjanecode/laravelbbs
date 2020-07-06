@@ -17,6 +17,8 @@
                     <p class="card-text">{{ $post->user->introduce }}</p>
                     <h5><strong>加入时间</strong></h5>
                     <p>{{ $post->user->created_at->diffForHumans() }}</p>
+                    <h5><strong>最后活跃</strong></h5>
+                    <p>{{ $post->user->last_active_at->diffForHumans() }}</p>
                     <a name="" id="" class="btn btn-primary" href="{{ route('users.show',$post->user_id) }}"
                         role="button">查看作者</a>
                 </div>

@@ -12,9 +12,12 @@
                <p class="card-text">{{ $user->introduce }}</p>
                <h5><strong>加入时间</strong></h5>
                  <p>{{ $user->created_at->diffForHumans() }}</p>
-                 @if(Auth::id() === $user->id)
-                 <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary">修改信息</a>
-                 @endif
+               <h5><strong>最后活跃</strong></h5>
+                 <p>{{ $user->last_active_at->diffForHumans() }}</p>
+
+               @if(Auth::id() === $user->id)
+               <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary">修改信息</a>
+               @endif
              </div>
            </div>
         </div>

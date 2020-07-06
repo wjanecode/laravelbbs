@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNotificationCountToUsersTable extends Migration
+class AddLastActiveAtToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,7 @@ class AddNotificationCountToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-
-            $table->integer('notification_count')->unsigned()->default(0);
-
+            $table->timestamp('last_active_at')->nullable();
         });
     }
 
@@ -30,7 +28,7 @@ class AddNotificationCountToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('notification_count');
+            $table->dropColumn('last_active_at');
         });
     }
 }
